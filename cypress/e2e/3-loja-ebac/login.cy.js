@@ -39,13 +39,19 @@ describe('Funcionalidade:login',() =>{
         cy.get('.woocommerce-form > .button').click()
         cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain','Olá, brunomarti976 (não é brunomarti976? Sair)')
     });
-    it.only('Deve fazer login com sucesso - usando fixture', () => {
+    it('Deve fazer login com sucesso - usando fixture', () => {
         cy.fixture('perfil').then(dados=>{
             cy.get('#username').type(dados.usuario)
             cy.get('#password').type(dados.senha, {log:false} )
             cy.get('.woocommerce-form > .button').click()
             cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain','Olá, brunomarti976 (não é brunomarti976? Sair)')
       })
+    });
+
+    it.only('Deve fazer login com sucesso-usando comandos customizados', () => {
+        cy.login('brunomarti976@gmail.com','789632145@Bm@')
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain','Olá, brunomarti976 (não é brunomarti976? Sair)')
+        
     });
 
 })
